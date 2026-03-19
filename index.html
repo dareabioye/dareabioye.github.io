@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dare Abioye — Data Scientist & Research Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --rust: #8b3a2a;
+    --slate: #2c3e50;
+    --muted: #7a7060;
+    --line: rgba(201,168,76,0.25);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 600px;
+    height: 600px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 2rem;
+    position: relative;
+  }
+
+  .data-viz-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+  }
+
+  .data-viz-card::before {
+    content: '';
+    position: absolute;
+    top: -8px; right: -8px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .skill-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--paper);
+    letter-spacing: 0.05em;
+  }
+
+  .skill-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+  }
+
+  .bar-track {
+    height: 3px;
+    background: rgba(245,240,232,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--gold);
+    animation: fillBar 1.5s ease forwards;
+    transform-origin: left;
+  }
+
+  @keyframes fillBar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .card-divider {
+    height: 1px;
+    background: rgba(245,240,232,0.1);
+    margin: 1.5rem 0;
+  }
+
+  .location-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* EXPERIENCE */
+  .experience-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 200px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--line);
+  }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding-top: 0.25rem;
+    line-height: 1.8;
+  }
+
+  .exp-date strong {
+    display: block;
+    color: var(--gold);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+
+  .exp-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  /* SKILLS */
+  #skills {
+    background: var(--ink);
+    color: var(--paper);
+    max-width: 100%;
+    padding: 6rem;
+  }
+
+  #skills .section-header {
+    border-color: rgba(201,168,76,0.2);
+  }
+
+  #skills h2 { color: var(--paper); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .skill-category h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(245,240,232,0.15);
+    color: rgba(245,240,232,0.7);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* PUBLICATIONS */
+  .pub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .pub-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+    border: 1px solid var(--line);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pub-item:hover {
+    border-color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .pub-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    text-align: center;
+    padding-top: 0.2rem;
+  }
+
+  .pub-content h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .pub-journal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .edu-card {
+    padding: 2.5rem;
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .edu-uni {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    padding: 6rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .contact-section h2 {
+    color: var(--paper);
+    margin-bottom: 1rem;
+  }
+
+  .contact-section p {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(245,240,232,0.2);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .contact-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* SCROLL ANIMATIONS */
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .thesis-card {
+    padding: 2.5rem;
+    border: 1px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    background: rgba(201,168,76,0.03);
+  }
+
+  .thesis-card::before {
+    content: 'THESIS';
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.2rem 0.6rem;
+  }
+
+  .thesis-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    max-width: 85%;
+  }
+
+  .thesis-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+
+  .thesis-abstract {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .thesis-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .thesis-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--ink);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+
+  .thesis-chapters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .chapter-box {
+    padding: 0.6rem;
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .chapter-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .chapter-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .thesis-chapters { grid-template-columns: repeat(3, 1fr); }
+    .thesis-title { max-width: 100%; }
+  }
+
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 2rem; }
+    section { padding: 4rem 2rem; }
+    #skills { padding: 4rem 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-item::before { display: none; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .contact-section { padding: 4rem 2rem; }
+    footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Dare Abioye</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Data Scientist & Research Professional</div>
+    <h1>Dare<br/><em>Abioye</em></h1>
+    <p class="hero-desc">
+      Quantitative researcher and data scientist with 18+ years of experience across three continents. Bridging rigorous academic research with applied data science — from Pan-African field operations to Deep Reinforcement Learning for renewable energy.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">18+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Continents</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">2+</span>
+        <span class="stat-label">Publications</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">6</span>
+        <span class="stat-label">DS Projects</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="/cdn-cgi/l/email-protection#8febeefdeaeeede6e0f6eacff6eee7e0e0a1ece0e2" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="data-viz-card">
+      <div class="card-label">// Technical Proficiency</div>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-meta">
+            <span class="skill-name">Python / R</span>
+            <span class="skill-pct">95%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-meta">
+            <span class="skill-name">SPSS / STATA</span>
+            <span class="skill-pct">98%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:98%; animation-delay:0.1s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-meta">
+            <span class="skill-name">SQL / Databases</span>
+            <span class="skill-pct">88%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:88%; animation-delay:0.2s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-meta">
+            <span class="skill-name">Power BI / Tableau</span>
+            <span class="skill-pct">90%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%; animation-delay:0.3s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-meta">
+            <span class="skill-name">Research Design</span>
+            <span class="skill-pct">97%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:97%; animation-delay:0.4s"></div></div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="location-tag">
+        <span class="dot"></span>
+        Konstanz, Germany — Available for opportunities
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">01 /</span>
+    <h2>Professional <em>Experience</em></h2>
+  </div>
+  <div class="experience-grid">
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>Current</strong>
+        Mar 2022 – Jan 2025<br/>Konstanz, Germany
+      </div>
+      <div class="exp-content">
+        <h3>Data Manager</h3>
+        <div class="exp-org">University of Konstanz — Development Research Group</div>
+        <ul class="exp-bullets">
+          <li>Designed and implemented empirical studies on development policy across Africa, Asia, and Latin America</li>
+          <li>Managed data collection, statistical analysis, and modelling using SPSS, STATA, R, and Python</li>
+          <li>Collaborated with regional study leaders to ensure methodological alignment and data quality</li>
+          <li>Co-authored peer-reviewed academic publications disseminated internationally</li>
+          <li>Conducted advanced statistical modelling and hypothesis testing for complex datasets</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>5 Years</strong>
+        Feb 2021 – Feb 2026<br/>Konstanz, Germany · Hybrid
+      </div>
+      <div class="exp-content">
+        <h3>Independent Consultant</h3>
+        <div class="exp-org">Self-Employed — Data Science & Research Consulting</div>
+        <ul class="exp-bullets">
+          <li>Delivered independent data science, statistical analysis, and research consulting engagements across multiple sectors</li>
+          <li>Applied advanced skills in Python, R, SQL, Power BI, Tableau, Machine Learning, and customer segmentation strategy</li>
+          <li>Advised clients on data modelling, business analysis, and emerging technologies for data-driven decision-making</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>7+ Years</strong>
+        Feb 2013 – Jul 2020<br/>Lagos, Nigeria
+      </div>
+      <div class="exp-content">
+        <h3>Senior Researcher → Head, Situation Room → Senior Project Manager → Project Manager</h3>
+        <div class="exp-org">Ipsos — Progressive Leadership Roles</div>
+        <ul class="exp-bullets">
+          <li><strong>Senior Researcher (Feb 2017–Jul 2020):</strong> Led end-to-end research programs for multinational clients; managed national survey with 24,000+ respondents annually (Access to Financial Services Survey); drove proposals, sales, and client retention</li>
+          <li><strong>Head, Situation Room (May 2015–Jan 2017):</strong> Led Ipsos Pan-Africa's centralised Quality Control hub, responsible for controlling and validating all fieldwork data across the continent before it proceeded to analysis. Enforced Ipsos global quality standards and commercial strategy across all regional operations — ensuring every data deliverable met the same international benchmark regardless of country of origin. Managed QC and Data Management Teams, oversaw cross-hub knowledge transfer, led training programmes, and contributed to annual budget planning for manpower and operations</li>
+          <li><strong>Senior Project Manager (May 2014–Apr 2015):</strong> Oversaw daily project delivery, change management, and budget control; mentored junior PMs and drove process improvement initiatives across the operations division</li>
+          <li><strong>Project Manager (Feb 2013–Apr 2014):</strong> Managed full project lifecycle from fieldwork to data output; coordinated with international teams including Ipsos Kenya for platform setup and training</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>2 Years</strong>
+        Apr 2011 – Jan 2013<br/>Lagos, Nigeria
+      </div>
+      <div class="exp-content">
+        <h3>Quality Assurance & Data Manager</h3>
+        <div class="exp-org">PSI (Practical Sampling International)</div>
+        <ul class="exp-bullets">
+          <li>Served on Steering Committee for Nigeria's largest retail census — Operation Octopus</li>
+          <li>Managed 300+ field personnel with real-time quality assurance via Situation Room</li>
+          <li>Led data processing, validation, and statistical analysis with stakeholder engagement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>3+ Years</strong>
+        Nov 2007 – Mar 2011<br/>Lagos, Nigeria
+      </div>
+      <div class="exp-content">
+        <h3>Data Processing Manager</h3>
+        <div class="exp-org">DC Consult</div>
+        <ul class="exp-bullets">
+          <li>Monitored quality assurance workflows and supervised data analysis initiatives</li>
+          <li>Conducted statistical evaluation using SPSS, Excel, and The Survey System</li>
+          <li>Delivered training programs to enhance data accuracy and survey compliance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-date">
+        <strong>6 Months</strong>
+        May – Oct 2007<br/>Abuja, Nigeria
+      </div>
+      <div class="exp-content">
+        <h3>Mathematics & Statistics Instructor</h3>
+        <div class="exp-org">Global International College, Abuja</div>
+        <ul class="exp-bullets">
+          <li>Taught Mathematics and Statistics at International Degree Foundation Programme (IDFP) and Advanced Level</li>
+          <li>Delivered Mechanics curriculum and organised specialist tutorial classes for high-potential candidates</li>
+          <li>Demonstrated early aptitude for teaching complex quantitative concepts to diverse student audiences</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02 /</span>
+    <h2>Featured <em>Projects</em></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal" data-num="01">
+      <div class="project-left">
+        <div class="project-tag">Machine Learning · Unsupervised Learning</div>
+        <h3>Fragrance Market Segmentation Using Clustering Algorithms</h3>
+        <div class="project-org">Independent Data Science Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">1,000</div>
+            <div class="metric-label">Products Analysed</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">4</div>
+            <div class="metric-label">Market Segments</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">0.285</div>
+            <div class="metric-label">Silhouette Score</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">3</div>
+            <div class="metric-label">Algorithms Compared</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">scikit-learn</span>
+          <span class="tech-pill">K-Means</span>
+          <span class="tech-pill">DBSCAN</span>
+          <span class="tech-pill">PCA</span>
+          <span class="tech-pill">t-SNE</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Seaborn</span>
+          <span class="tech-pill">Google Colab</span>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Developed a comprehensive unsupervised machine learning pipeline to segment 1,000 fragrance products into actionable market clusters for a hypothetical e-commerce analytics use case. Faced with missing scent composition data, engineered four new features — log-transformed price, popularity ratio, brand frequency, and NLP-extracted gender — to capture consumer behaviour and market dynamics. Applied K-Means, Hierarchical, and DBSCAN clustering, evaluating each using Silhouette Score and Davies-Bouldin Index, with PCA and t-SNE for high-dimensional visualisation.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Findings & Business Insights</h4>
+          <ul class="findings-list">
+            <li>K-Means (K=4) selected as optimal model, balancing statistical validity with full product coverage — DBSCAN excluded 12.7% of products as noise, creating unacceptable gaps for business strategy</li>
+            <li>Identified Mass-Market Bestsellers cluster with extraordinary popularity ratio of 2,721 — signalling chronic stockout risk and dynamic pricing opportunity</li>
+            <li>High-End Niche cluster revealed premium segment (avg £42) with strong margin potential — recommended scarcity-based inventory and prestige distribution strategy</li>
+            <li>Gender analysis exposed 100% male-dominant modal across all clusters — strategic gap identified in women's luxury fragrance portfolio development</li>
+            <li>PCA retained 53% variance in 2D projection; t-SNE confirmed non-linear cluster separability not visible in linear projections</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Cluster</th>
+                <th>Segment</th>
+                <th>Avg Price</th>
+                <th>Pop. Ratio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>0</td><td>High-End Niche</td><td>~£42</td><td>34.6</td></tr>
+              <tr><td>1</td><td>Core Performers</td><td>~£37</td><td>42.1</td></tr>
+              <tr><td>2</td><td>Mass-Market</td><td>~£28</td><td>2,721</td></tr>
+              <tr><td>3</td><td>Value-Oriented</td><td>~£23</td><td>8.6</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-num="02">
+      <div class="project-left">
+        <div class="project-tag">Data Visualisation · Business Intelligence</div>
+        <h3>UK Confectionary Regional Distribution Strategy Dashboard</h3>
+        <div class="project-org">Independent Data Science Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">5</div>
+            <div class="metric-label">UK Regions Analysed</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">6 yrs</div>
+            <div class="metric-label">Data Coverage</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">0.67%</div>
+            <div class="metric-label">Peak Profit Margin</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">Live</div>
+            <div class="metric-label">Interactive Dashboard</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Plotly</span>
+          <span class="tech-pill">Dash</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Seaborn</span>
+          <span class="tech-pill">Matplotlib</span>
+          <span class="tech-pill">Google Colab</span>
+          <span class="tech-pill">GitHub</span>
+        </div>
+
+        <div style="margin-top:1.2rem;">
+          <a href="https://github.com/dareabioye/DATA-VISUALIZATION-PORTFOLIO" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--gold);letter-spacing:0.1em;text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;">
+            ↗ View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Designed and built a fully interactive business intelligence dashboard for a UK confectionary distribution use case, analysing six years of regional sales data (2000–2005) across five UK regions. Performed end-to-end data cleaning, feature engineering, and EDA before creating a suite of static and interactive visualisations. The centrepiece is a Dash-powered interactive dashboard with real-time dropdown filters for region, product, year, and month — enabling both technical analysts and non-technical executives to explore the data independently.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Findings & Business Insights</h4>
+          <ul class="findings-list">
+            <li>Scotland (£63.3M) and Jersey (£62.8M) identified as top-performing regions — recommended priority for distribution investment; England significantly underperformed despite largest population base</li>
+            <li>Caramel Nut emerged as highest-margin product (avg 0.67%, peak 2.70%) — recommended for targeted marketing and premium distribution; Plain product flagged for cost structure review at 0.11% margin</li>
+            <li>Strong seasonal pattern confirmed — November/December consistently peak sales months, enabling proactive Q4 inventory and logistics strategy</li>
+            <li>Box plot chosen over average bar chart to expose profit margin volatility and outliers — preventing misleading executive decisions from a single mean value</li>
+            <li>Interactive Dash dashboard designed on F-pattern reading principle — KPIs at top, core analysis mid-section, time trends at base — ensuring executive-level accessibility without technical expertise</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Total Revenue</th>
+                <th>Total Profit</th>
+                <th>Ranking</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Scotland</td><td>£63.3M</td><td>£929K</td><td>🥇 1st</td></tr>
+              <tr><td>Jersey</td><td>£62.8M</td><td>£890K</td><td>🥈 2nd</td></tr>
+              <tr><td>N. Ireland</td><td>£43.4M</td><td>£747K</td><td>🥉 3rd</td></tr>
+              <tr><td>Wales</td><td>£42.5M</td><td>£718K</td><td>4th</td></tr>
+              <tr><td>England</td><td>£39.1M</td><td>£677K</td><td>5th ⚠️</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-num="03">
+      <div class="project-left">
+        <div class="project-tag">Predictive Analytics · Regression Modelling</div>
+        <h3>Paris Housing Market Price Prediction & EDA</h3>
+        <div class="project-org">Independent Data Science Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">0.66</div>
+            <div class="metric-label">Random Forest R²</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">91.7%</div>
+            <div class="metric-label">Enhanced Model R²</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">12+</div>
+            <div class="metric-label">Features Engineered</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">2</div>
+            <div class="metric-label">Models Compared</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">scikit-learn</span>
+          <span class="tech-pill">Random Forest</span>
+          <span class="tech-pill">Linear Regression</span>
+          <span class="tech-pill">RFECV</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Seaborn</span>
+          <span class="tech-pill">StandardScaler</span>
+          <span class="tech-pill">IQR Outlier Capping</span>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Conducted an end-to-end predictive analytics study on a Paris residential housing dataset, building machine learning models to identify key price drivers and forecast property values. The pipeline included rigorous data cleaning (IQR outlier capping, median imputation, duplicate removal), feature engineering of 12+ new variables (price per sqft, property age, renovation status, bedroom density), log transformation to address skewness, and StandardScaler normalisation. Two regression models — Linear Regression and Random Forest — were evaluated and compared using R² and MSE on an 80/20 train-test split, with Recursive Feature Elimination with Cross-Validation (RFECV) for hyperparameter tuning.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Findings & Business Insights</h4>
+          <ul class="findings-list">
+            <li>Random Forest (R²=0.66, MSE=0.33) outperformed Linear Regression (R²=0.61, MSE=0.38) — recommended as the preferred model for capturing non-linear property price relationships</li>
+            <li>Enhanced feature engineering lifted R² from 0.56 to 0.91 — a 36-percentage point improvement, demonstrating the power of domain-informed feature creation</li>
+            <li>Living area (sqft) and construction grade are the strongest price predictors (correlations ~0.65–0.70); bedrooms and floors show weaker direct relationships</li>
+            <li>Renovated properties command ~12% price premium over non-renovated equivalents — key investment signal for real estate strategy</li>
+            <li>Inverse relationship between floors and total sqft reflects Paris's urban zoning constraints (PLU regulations), where multi-floor buildings are constrained in footprint</li>
+            <li>Bedroom-price relationship plateaus beyond 4–5 bedrooms, suggesting diminishing returns — bathrooms add more value per unit than bedrooms in the Paris market</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>R² Score</th>
+                <th>MSE</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Linear Regression</td><td>0.61</td><td>0.38</td><td>Baseline</td></tr>
+              <tr><td>Random Forest</td><td>0.66</td><td>0.33</td><td>✅ Optimal</td></tr>
+              <tr><td>Enhanced MLR</td><td>0.917</td><td>—</td><td>⭐ Best overall</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-num="04">
+      <div class="project-left">
+        <div class="project-tag">Deep Learning · Neural Networks · Image Classification</div>
+        <h3>Handwritten Digit Classification with Multi-Configuration Neural Networks</h3>
+        <div class="project-org">Independent AI Research Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">97.92%</div>
+            <div class="metric-label">Best Test Accuracy</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">6</div>
+            <div class="metric-label">Models Compared</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">70k</div>
+            <div class="metric-label">Images Processed</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">18.89s</div>
+            <div class="metric-label">Best Training Time</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">TensorFlow</span>
+          <span class="tech-pill">Keras</span>
+          <span class="tech-pill">MNIST</span>
+          <span class="tech-pill">ReLU / Tanh</span>
+          <span class="tech-pill">Adam / SGD</span>
+          <span class="tech-pill">L2 Regularisation</span>
+          <span class="tech-pill">Early Stopping</span>
+          <span class="tech-pill">Confusion Matrix</span>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Designed and trained six feedforward neural networks to classify handwritten digits (0–9) from the MNIST dataset, conducting a rigorous comparative study across activation functions (ReLU vs Tanh), optimisers (Adam vs SGD), and regularisation techniques (L2). Each model shared the same architecture — 784-unit input, three hidden layers (512→256→128 neurons), and a 10-class Softmax output — to isolate the effect of each hyperparameter. Models were trained with early stopping (patience=3), batch size 64, and up to 50 epochs. Evaluation included training/validation curves, confusion matrices, and sample prediction visualisations.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Findings & Technical Insights</h4>
+          <ul class="findings-list">
+            <li>ReLU + Adam achieved the highest accuracy (97.92%) and fastest training time (18.89s) — aligned with Glorot & Bengio (2010) on ReLU's non-saturating gradient propagation advantage</li>
+            <li>Tanh consistently underperformed ReLU across all configurations, with the largest gap under L2 regularisation — confirming Tanh's susceptibility to vanishing gradients in deeper networks</li>
+            <li>SGD reduced overfitting gap between training and validation accuracy compared to Adam, despite significantly slower convergence (126s vs 20s for Tanh)</li>
+            <li>L2 regularisation (λ=0.001) improved generalisation and controlled overfitting, particularly when combined with early stopping</li>
+            <li>Ethical analysis flagged MNIST's clean, balanced nature as a limitation for real-world deployment — noting Buolamwini & Gebru (2018) findings on AI classification bias in production environments</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>Test Loss</th>
+                <th>Train Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>ReLU + Adam</td><td>97.92%</td><td>0.0705</td><td>18.89s ✅</td></tr>
+              <tr><td>ReLU + SGD</td><td>97.51%</td><td>0.0796</td><td>79.92s</td></tr>
+              <tr><td>ReLU + Adam + L2</td><td>97.64%</td><td>0.1574</td><td>70.25s</td></tr>
+              <tr><td>Tanh + Adam</td><td>97.23%</td><td>0.0914</td><td>20.07s</td></tr>
+              <tr><td>Tanh + SGD</td><td>97.46%</td><td>0.0819</td><td>126.17s</td></tr>
+              <tr><td>Tanh + Adam + L2</td><td>96.82%</td><td>0.2203</td><td>41.65s</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-num="05">
+      <div class="project-left">
+        <div class="project-tag">Cloud Architecture · Big Data · AWS · Data Engineering</div>
+        <h3>Scalable Cloud Data Pipeline Design for Global Real Estate Enterprise</h3>
+        <div class="project-org">Independent Cloud Engineering Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">AWS</div>
+            <div class="metric-label">Recommended Platform</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">3</div>
+            <div class="metric-label">Cloud Platforms Evaluated</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">4+</div>
+            <div class="metric-label">Regions / Jurisdictions</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">Live</div>
+            <div class="metric-label">PoC Deployed on S3</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">AWS S3</span>
+          <span class="tech-pill">AWS Glue</span>
+          <span class="tech-pill">Amazon Kinesis</span>
+          <span class="tech-pill">AWS Lambda</span>
+          <span class="tech-pill">Amazon Redshift</span>
+          <span class="tech-pill">SageMaker</span>
+          <span class="tech-pill">AWS IAM / KMS</span>
+          <span class="tech-pill">CloudWatch</span>
+          <span class="tech-pill">boto3</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">GDPR Compliance</span>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Designed a full-stack, enterprise-grade cloud data pipeline architecture for a fictional international real estate group operating across UK, US, Europe, and the Middle East. The project involved appraising data acquisition needs (IoT sensors, legacy CRMs, transactional data, market feeds), evaluating AWS vs Azure vs GCP against technical and regulatory requirements, and producing a detailed AWS-based architecture. A working proof-of-concept was implemented using Python (boto3) to simulate IoT device data and upload structured JSON records to Amazon S3, validated via AWS console.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Design Decisions & Architecture Highlights</h4>
+          <ul class="findings-list">
+            <li>AWS recommended over Azure (53.0) and GCP (54.0) based on weighted scoring (56.5) — driven by superior global reach, broadest ML/AI services (SageMaker), and most extensive compliance certifications</li>
+            <li>Three-zone data lake architecture on S3: Raw → Processed → Curated — ensuring data integrity, schema-on-read flexibility, and GDPR-compliant data governance via AWS Lake Formation</li>
+            <li>Dual ingestion strategy: AWS Glue for batch ETL of legacy systems; Amazon Kinesis for real-time IoT and live listing streams — supporting both historical migration and live analytics</li>
+            <li>GDPR compliance embedded at architecture level: VPC isolation, KMS encryption at rest and in transit, CloudTrail audit logging, anonymisation for research data sharing with academic partner</li>
+            <li>Proof-of-concept successfully deployed: Python boto3 simulation generating IoT sensor data (temperature, humidity, location) uploaded to structured S3 folder paths, confirmed via AWS S3 console</li>
+            <li>Phased implementation roadmap recommended, with IaC (CloudFormation/Terraform), CI/CD security checks, and multi-AZ disaster recovery built into long-term maintenance plan</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Score</th>
+                <th>Key Strength</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AWS</td><td>56.5</td><td>Global reach + SageMaker</td><td>✅ Recommended</td></tr>
+              <tr><td>GCP</td><td>54.0</td><td>BigQuery + AI innovation</td><td>2nd</td></tr>
+              <tr><td>Azure</td><td>53.0</td><td>Microsoft ecosystem</td><td>3rd</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-num="06">
+      <div class="project-left">
+        <div class="project-tag">Mathematics for Data Science · Statistical Analysis · Probability</div>
+        <h3>Conditional Probability Analysis of Age-Based Consumer Purchasing Behaviour</h3>
+        <div class="project-org">Independent Statistical Research Project · 2025</div>
+
+        <div class="project-metrics">
+          <div class="metric-box">
+            <div class="metric-value">40k</div>
+            <div class="metric-label">Random Data Points</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">0.649</div>
+            <div class="metric-label">P(Purchase | Age=70) Weighted</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">0.399</div>
+            <div class="metric-label">P(Purchase | Age=70) Uniform</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">63%</div>
+            <div class="metric-label">Probability Uplift</div>
+          </div>
+        </div>
+
+        <div class="project-tech-stack">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">NumPy</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Matplotlib</span>
+          <span class="tech-pill">Seaborn</span>
+          <span class="tech-pill">Bayes' Theorem</span>
+          <span class="tech-pill">Conditional Probability</span>
+          <span class="tech-pill">Monte Carlo Simulation</span>
+        </div>
+      </div>
+
+      <div class="project-right">
+        <p class="project-overview">
+          Designed and implemented a Monte Carlo simulation of 40,000 randomly generated consumer records across six age groups (20–70), comparing two probabilistic models of purchasing behaviour. The weighted model assigned age-dependent purchase probabilities (15%→65%), reflecting the real-world tendency of older consumers to purchase more frequently. The uniform model applied an equal 40% probability across all groups as a baseline control. Conditional probability P(Purchase | Age=70) was calculated analytically using Bayes' theorem and verified computationally, with full mathematical workings and comparative visualisation.
+        </p>
+
+        <div class="project-findings">
+          <h4>// Key Mathematical Findings & Business Insights</h4>
+          <ul class="findings-list">
+            <li>Weighted model: P(Purchase | Age=70) = 0.6494, derived as P(Purchase ∩ Age=70) / P(Age=70) = 0.1071 / 0.1650 — consistent with the 65% prior probability assigned to 70-year-olds</li>
+            <li>Unweighted model: P(Purchase | Age=70) = 0.3989 — confirming that removing age-based weighting collapses all conditional probabilities toward the global mean of ~0.40</li>
+            <li>Weighted model produces a 63% uplift in purchase probability for the 70+ age group vs uniform assumption — critical signal for age-targeted marketing strategy</li>
+            <li>Both models produce identical overall purchase rates (~0.40) but diverge sharply at the subgroup level — demonstrating Simpson's Paradox risk when using only aggregate statistics</li>
+            <li>Scatter plot analysis confirmed linear monotonic increase in weighted purchase probability (0.14 at 20 → 0.65 at 70) versus flat ~0.40 line for unweighted model across all groups</li>
+          </ul>
+
+          <table class="cluster-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>P(Purchase | Age=70)</th>
+                <th>Overall Rate</th>
+                <th>Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Weighted</td><td>0.6494</td><td>~0.40</td><td>Targeted marketing ✅</td></tr>
+              <tr><td>Unweighted</td><td>0.3989</td><td>~0.40</td><td>Baseline / control</td></tr>
+              <tr><td>Difference</td><td>+62.8%</td><td>—</td><td>Model assumption impact</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal" style="border-color:rgba(201,168,76,0.2)">
+    <span class="section-num">03 /</span>
+    <h2>Technical <em>Stack</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <h4>Programming</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Statistical Software</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">SPSS</span>
+        <span class="skill-tag">STATA</span>
+        <span class="skill-tag">Advanced Excel</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Visualisation</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">ggplot2</span>
+        <span class="skill-tag">matplotlib</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Survey Tools</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Qualtrics</span>
+        <span class="skill-tag">TSS</span>
+        <span class="skill-tag">STG</span>
+        <span class="skill-tag">Questionstar</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Research Methods</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Survey Design</span>
+        <span class="skill-tag">Hypothesis Testing</span>
+        <span class="skill-tag">Regression Modelling</span>
+        <span class="skill-tag">Sampling</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Leadership & Strategy</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Global Strategy Alignment</span>
+        <span class="skill-tag">Team Leadership</span>
+        <span class="skill-tag">Budget Management</span>
+        <span class="skill-tag">Stakeholder Engagement</span>
+        <span class="skill-tag">Thought Leadership</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Advanced Analytics</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Customer Segmentation</span>
+        <span class="skill-tag">Intelligence Analysis</span>
+        <span class="skill-tag">GIS</span>
+        <span class="skill-tag">Mathematical Programming</span>
+        <span class="skill-tag">Emerging Technologies</span>
+        <span class="skill-tag">Business Analysis</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <h4>Languages</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">English (Full)</span>
+        <span class="skill-tag">German (Basic)</span>
+        <span class="skill-tag">Yoruba (Native)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header reveal">
+    <span class="section-num">04 /</span>
+    <h2>Peer-Reviewed <em>Publications</em></h2>
+  </div>
+  <div class="pub-list">
+    <div class="pub-item reveal">
+      <div class="pub-year">25</div>
+      <div class="pub-content">
+        <h4>Prevalence and correlates of sexual violence against adolescents: Quantitative evidence from rural and urban communities in South-West Nigeria</h4>
+        <div class="pub-journal">Abreu, L., Abioye, D., et al. — 2025</div>
+      </div>
+    </div>
+    <div class="pub-item reveal">
+      <div class="pub-year">23</div>
+      <div class="pub-content">
+        <h4>Abuse and Humiliation in the Delivery Room: Prevalence and Associated Factors of Obstetric Violence in Ghana</h4>
+        <div class="pub-journal">Yalley, A., Abioye, D., et al. — 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">05 /</span>
+    <h2>Academic <em>Formation</em></h2>
+  </div>
+  <div class="thesis-card reveal">
+    <div class="thesis-title">Deep Reinforcement Learning for Wind Farm Control: A Hyperparameter Optimisation and Interpretability Study</div>
+    <div class="thesis-meta">MSc Dissertation · Arden University · 2026 — Results Pending Board Ratification</div>
+    <p class="thesis-abstract">
+      A rigorous five-chapter investigation into the application of Deep Reinforcement Learning (DRL) for wind farm control optimisation, comparing three DRL algorithms — PPO, SAC, and TD3 — against classical baseline controllers (PI, MPC, Greedy). The study integrates systematic hyperparameter optimisation with SHAP-based explainability analysis, identifying three critical failure modes in DRL policy behaviour. Built on a Gaussian wake model simulation environment, the research combines post-positivist methodology with statistical validation and effect size calculations — contributing directly to both academic DRL research and industry-facing renewable energy systems.
+    </p>
+    <div class="thesis-pills">
+      <span class="thesis-pill">Deep Reinforcement Learning</span>
+      <span class="thesis-pill">PPO · SAC · TD3</span>
+      <span class="thesis-pill">SHAP Explainability</span>
+      <span class="thesis-pill">Hyperparameter Optimisation</span>
+      <span class="thesis-pill">Gaussian Wake Model</span>
+      <span class="thesis-pill">Wind Farm Control</span>
+      <span class="thesis-pill">Renewable Energy AI</span>
+      <span class="thesis-pill">Statistical Validation</span>
+      <span class="thesis-pill">Python</span>
+    </div>
+    <div class="thesis-chapters">
+      <div class="chapter-box">
+        <div class="chapter-num">Ch.1</div>
+        <div class="chapter-title">Project Framing</div>
+      </div>
+      <div class="chapter-box">
+        <div class="chapter-num">Ch.2</div>
+        <div class="chapter-title">Literature Review</div>
+      </div>
+      <div class="chapter-box">
+        <div class="chapter-num">Ch.3</div>
+        <div class="chapter-title">Methodology & Implementation</div>
+      </div>
+      <div class="chapter-box">
+        <div class="chapter-num">Ch.4</div>
+        <div class="chapter-title">Critical Evaluation</div>
+      </div>
+      <div class="chapter-box">
+        <div class="chapter-num">Ch.5</div>
+        <div class="chapter-title">Conclusions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-degree">MSc Data Science</div>
+      <div class="edu-uni">Arden University, United Kingdom</div>
+      <div class="edu-year">2026 — Results Pending Board Ratification</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">BSc Statistics</div>
+      <div class="edu-uni">University of Ibadan, Nigeria</div>
+      <div class="edu-year">2001</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="section-header reveal" style="border-color:rgba(201,168,76,0.2); justify-content:center">
+    <span class="section-num">06 /</span>
+    <h2>Get In <em>Touch</em></h2>
+  </div>
+  <p class="reveal">Open to research collaborations, PhD opportunities,<br/>and senior data science roles.</p>
+  <div class="contact-links reveal">
+    <a href="/cdn-cgi/l/email-protection#fa9e9b889f9b989395839fba839b929595d4999597" class="contact-link">✉ <span class="__cf_email__" data-cfemail="620603100703000b0d1b07221b030a0d0d4c010d0f">[email&#160;protected]</span></a>
+    <a href="https://www.linkedin.com/in/dare-abioye-05483324" target="_blank" class="contact-link">in LinkedIn</a>
+    <a href="tel:+4915750470545" class="contact-link">☎ +49 1575 047 0545</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Dare Abioye — Data Scientist & Research Professional</p>
+  <p>Konstanz, Germany</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Animate bar fills on scroll
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.bar-fill').
